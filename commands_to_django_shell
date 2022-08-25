@@ -13,6 +13,7 @@ Author.objects.create(user = User.objects.get(username = 'kir'))
 
 # 3. Добавить 4 категории в модель Category
 
+from posts.models import *
 Category.objects.create(category_name = 'Наука')
 Category.objects.create(category_name = 'Искусство')
 Category.objects.create(category_name = 'Технологии')
