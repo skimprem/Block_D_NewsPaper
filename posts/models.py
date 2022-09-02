@@ -1,13 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import User
 from accounts.models import Author 
-from accounts.resources import POST_TYPE
+from .resources import POST_TYPE
+from django.urls import reverse
 
 class Category(models.Model):
     """
     Category: категории новостей/статей
     """
     category_name = models.CharField(max_length=255, unique=True)
+
+    def __str__(self) -> str:
+        return f'{self.category_name}'
 
 class Post(models.Model):
     """
@@ -52,6 +56,9 @@ class Post(models.Model):
     def preview(self):
         return f'{self.text[0:124]}...'
 
+    def get_absolute_url(self):
+        return reverse("post", kwargs={"pk": self.pk})
+    
 class PostCategory(models.Model):
     """
     PostCategory: промежуточная модель для m2m связи

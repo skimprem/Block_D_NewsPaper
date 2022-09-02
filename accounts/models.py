@@ -31,3 +31,6 @@ class Author(models.Model):
             for comments_to_post in Comment.objects.filter(post = post):
                 self._rating += comments_to_post.rating
         self.save()
+
+    def __str__(self) -> str:
+        return f'{self.user.first_name} {self.user.last_name}'
