@@ -1,5 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from django import forms
+from allauth.account.forms import SignupForm
+from django.contrib.auth.models import Group
 # from posts.models import Post, Comment 
 
 class Author(models.Model):
@@ -34,3 +38,12 @@ class Author(models.Model):
 
     def __str__(self) -> str:
         return f'{self.user.first_name} {self.user.last_name}'
+
+
+class BasicSignupForm(SignupForm):
+    
+    def save(self, request):
+        user = super(BasicSignupForm, self).save(request)
+        basic_group = Group.objects.get(name='common')
+        basic_group.user_set.add(user)
+        return user

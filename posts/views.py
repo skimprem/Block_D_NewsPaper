@@ -8,6 +8,7 @@ from .forms import PostForm
 from .filters import PostFilter
 from django.http import HttpRequest
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
 class PostsList(ListView):
@@ -34,10 +35,11 @@ class PostDetail(DetailView):
     context_object_name = 'post'
 
 
-class PostCreate(CreateView):
+class PostCreate(LoginRequiredMixin, CreateView, PermissionRequiredMixin):
     form_class = PostForm
     model = Post
     template_name = 'create.html'
+    permission_required = ('posts.add_post')
 
     def form_valid(self, form):
         post = form.save(commit=False)
@@ -54,10 +56,11 @@ class PostSearch(PostsList):
     template_name = 'search.html'
     context_object_name = 'posts'
 
-class PostEdit(UpdateView):
+class PostEdit(LoginRequiredMixin, UpdateView, PermissionRequiredMixin):
     form_class = PostForm
     model = Post
     template_name = 'edit.html'
+    permission_required = ('posts.change_post')
 
     def form_valid(self, form):
         post = form.save(commit=False)
@@ -69,10 +72,11 @@ class PostEdit(UpdateView):
             else:
                 raise ValidationErr(f'Редактирование невозможно: путь {pub_path} не соответствует типу публикации {self.object.post_type}')
 
-class PostDelete(DeleteView):
+class PostDelete(LoginRequiredMixin, DeleteView, PermissionRequiredMixin):
     model = Post
     template_name = 'delete.html'
     success_url = reverse_lazy('posts_list')
+    permission_required = ('posts.delete_post')
 
     def form_valid(self, form):
         if self.request.method == 'POST':
