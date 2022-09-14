@@ -21,6 +21,10 @@ Post
             <td>
                 <i>
                 {{ post.pub_time|date:'d.m.Y' }}
+                &nbsp Подписаться: 
+                {% for category in post.categories.all %}
+                    <span style="border: 1px solid #000"><a href="">{{category}}</a></span>&nbsp 
+                {% endfor %}
                 </i>
             </td>
         </tr>

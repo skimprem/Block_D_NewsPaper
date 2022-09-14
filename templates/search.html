@@ -12,9 +12,6 @@
 
     <form action='' method='get'>
         {{ filterset.form.as_p }}
-        {% comment %} <label for='start'> Start date: </label>
-        <input type='date' id='start' name='trip-start'
-        value='Date'/> {% endcomment %}
         <input type='submit' value='Найти'/>
     </form>
     {% if posts %}

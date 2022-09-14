@@ -11,7 +11,7 @@ News
 
 <!-- Выводим все новости -->
 {% block content %}
-Всего публикаций на странице: {{ posts|length }}
+{% comment %} Всего публикаций на странице: {{ posts|length }} {% endcomment %}
 {% if posts %}
     <table>
         {% for post in posts %}
@@ -23,13 +23,14 @@ News
             <tr>
                 <td>
                     <i>{{ post.pub_time|date:'d.m.Y' }}</i>
+                    &nbsp Подписаться:
                     {% for category in post.categories.all %}
-                        &nbsp <span style="border: 1px solid #000"> {{ category }} </span> &nbsp 
+                        <a href="/subscribe/{{category.pk}}">{{category}}</a> 
                     {% endfor %}
                 </td>
             </tr>
             <tr>
-                <td>{{ post.text|truncatewords:20|censor }}</td>
+                <td>{{ post.text|truncatewords:20|censor }} <a href="/news/{{post.pk}}">Читать</a></td>
             </tr>
         {% endfor %}
     </table>
