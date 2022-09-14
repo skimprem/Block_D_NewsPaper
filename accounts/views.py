@@ -4,6 +4,8 @@ from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
+from .models import UsersSubscriptions
+from posts.models import Post, Category
 
 
 class AccountView(LoginRequiredMixin, TemplateView):
@@ -17,7 +19,14 @@ class AccountView(LoginRequiredMixin, TemplateView):
 @login_required
 def upgrade_me(request):
     user = request.user
-    premium_group = Group.objects.get(name='authors')
+    authors_group = Group.objects.get(name='authors')
     if not request.user.groups.filter(name='authors').exists():
-        premium_group.user_set.add(user)
+        authors_group.user_set.add(user)
     return redirect('/account/')
+
+@login_required
+def subscribe_me(request, category_id):
+    print(Category.objects.get(pk=category_id))
+    subscription = UsersSubscriptions.objects.filter(user = request.user, category = Category.objects.get(pk=category_id))
+    print(subscription)
+    return redirect("/news/")

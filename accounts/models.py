@@ -1,10 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from django import forms
+# from django import forms
 from allauth.account.forms import SignupForm
 from django.contrib.auth.models import Group
-# from posts.models import Post, Comment 
+# from posts.models import Category
 
 class Author(models.Model):
     """
@@ -47,3 +47,8 @@ class BasicSignupForm(SignupForm):
         basic_group = Group.objects.get(name='common')
         basic_group.user_set.add(user)
         return user
+
+class UsersSubscriptions(models.Model):
+    from posts.models import Category
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
