@@ -13,11 +13,11 @@
                 <tr>
                     <td> {{ group.name }} </td>
                     <td>
-                        <table> 
+                        <ul> 
                             {% for permission in group.permissions.all %}
-                                    <tr> <td> {{ permission.name }} </td> </tr>
+                                    <li> {{ permission.name }} </li>
                             {% endfor %}
-                        </table>
+                        </ul>
                     </td>
                 {% endfor %}
                 </tr>
@@ -34,7 +34,7 @@
         <tr> <td> Joined </td> <td> {{ request.user.date_joined }} </td> </tr>
     </table>
     {% if is_not_author %}
-        <button> <a href='upgrade/'> Стать автором </a> </button>
+        <button> <a href='/upgrade/'> Стать автором </a> </button>
     {% endif %}
     <button> <a href='/accounts/logout/'>Выйти</a> </button>
 {% endblock content %}

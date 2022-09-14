@@ -11,7 +11,7 @@ News
 
 <!-- Выводим все новости -->
 {% block content %}
-<h1>Всего публикаций: {{ posts|length }}</h1>
+Всего публикаций на странице: {{ posts|length }}
 {% if posts %}
     <table>
         {% for post in posts %}
@@ -23,6 +23,9 @@ News
             <tr>
                 <td>
                     <i>{{ post.pub_time|date:'d.m.Y' }}</i>
+                    {% for category in post.categories.all %}
+                        &nbsp <span style="border: 1px solid #000"> {{ category }} </span> &nbsp 
+                    {% endfor %}
                 </td>
             </tr>
             <tr>
