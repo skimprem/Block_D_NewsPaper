@@ -1,7 +1,7 @@
 from tkinter import W
 from urllib import request
 from xml.dom import ValidationErr
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post, Category
 from .forms import PostForm
@@ -54,7 +54,6 @@ class PostCreate(LoginRequiredMixin, CreateView, PermissionRequiredMixin):
             elif path_info == '/articles/create/':
                 post.post_type = 'PA'
     
-    # def post(self, request, *args, **kwargs):
         post_title = self.request.POST['title']
         post_text = self.request.POST['text']
         categories_id = self.request.POST['categories']
@@ -70,27 +69,21 @@ class PostCreate(LoginRequiredMixin, CreateView, PermissionRequiredMixin):
             )
             mail.save()
 
-            send_mail(
-                subject=mail.title,
-                message=mail.text,
-                from_email='romanags@yandex.ru',
-                recipient_list=[subscription.user.email]
+            html_content = render_to_string(
+                'subscribe_create.html',
+                {'mail': mail}
             )
-            # html_content = render_to_string(
-            #     'subscribe_create.html',
-            #     {'mail': mail}
-            # )
-            # print(html_content)
+            print(html_content)
 
-            # msg = EmailMultiAlternatives(
-            #     subject=f'{mail.title}',
-            #     body=f'{mail.text}',
-            #     from_email='romanags@yandex.ru',
-            #     to=[subscription.user.email],
-            # )
+            msg = EmailMultiAlternatives(
+                subject=f'{mail.title}',
+                body=f'{mail.text}',
+                from_email='romanags@yandex.ru',
+                to=[subscription.user.email],
+            )
 
-            # msg.attach_alternative(html_content, "text/html")
-            # msg.send()
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
             
         return super().form_valid(form) 
 

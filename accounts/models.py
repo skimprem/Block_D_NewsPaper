@@ -56,6 +56,6 @@ class UsersSubscriptions(models.Model):
 class SubscribeMail(models.Model):
     username = models.CharField(max_length=100)
     title = models.CharField(max_length=250)
-    text = models.TextField(max_length=50)
+    text = models.TextField()
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
