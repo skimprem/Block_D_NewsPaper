@@ -52,3 +52,10 @@ class UsersSubscriptions(models.Model):
     from posts.models import Category
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class SubscribeMail(models.Model):
+    username = models.CharField(max_length=100)
+    title = models.CharField(max_length=250)
+    text = models.TextField(max_length=50)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)

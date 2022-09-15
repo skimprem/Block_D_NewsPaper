@@ -164,3 +164,10 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'romanags'
+# EMAIL_HOST_PASSWORD = 'upgybfyvkjcqpuaa'
+EMAIL_HOST_PASSWORD = 'yxkvslvfcvcffknq'
+EMAIL_USE_SST = True
