@@ -25,7 +25,7 @@ News
                     <i>{{ post.pub_time|date:'d.m.Y' }}</i>
                     &nbsp Подписаться:
                     {% for category in post.categories.all %}
-                        <a href="/subscribe/{{category.pk}}">{{category}}</a> 
+                        <a href="subscribe/?category_id={{category.pk}}&path_info={{request.path_info}}">{{category}}</a> 
                     {% endfor %}
                 </td>
             </tr>

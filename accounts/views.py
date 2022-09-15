@@ -25,8 +25,14 @@ def upgrade_me(request):
     return redirect('/account/')
 
 @login_required
-def subscribe_me(request, category_id):
-    print(Category.objects.get(pk=category_id))
-    subscription = UsersSubscriptions.objects.filter(user = request.user, category = Category.objects.get(pk=category_id))
-    print(subscription)
-    return redirect("/news/")
+def subscribe_me(request):
+    category_id = request.GET.get('category_id')
+    print(category_id)
+    print(Category.objects.get(pk = category_id))
+    try:
+        subscription = UsersSubscriptions.objects.get(user = request.user, category = Category.objects.get(pk = category_id))
+    except UsersSubscriptions.DoesNotExist:
+        subscription = UsersSubscriptions.objects.create(user = request.user, category = Category.objects.get(pk = category_id))
+
+    print(Category.objects.get(pk=subscription.category.pk))
+    return redirect(request.GET.get('path_info'))
