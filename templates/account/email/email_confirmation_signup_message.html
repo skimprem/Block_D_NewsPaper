@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email confirmation</title>
+</head>
+<body>
+    {% load account %} <!-- Загружаем тег, который позволит получить нам ссылку на подтверждение -->
+    <h1>{{ user.username }}, спасибо за регистрацию!</h1>
+    <h3>Пожалйста, пройдите <a href="{{ activate_url }}">по ссылке</a> для подтверждения учётной записи</h3>
+     <!-- Вставляем ссылку на активацию -->
+</body>
+</html>

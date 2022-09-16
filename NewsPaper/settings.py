@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
+# from dotenv import load_dotenv
+
+# load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,13 +43,15 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
     'accounts',
-    'posts',
+    'posts.apps.PostsConfig',
     'django_filters',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
 ]
+
+DEFAULT_FROM_EMAIL = 'romanags@yandex.ru'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -147,9 +152,9 @@ SITE_ID = 1
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USERNAME_REQUIRED = True 
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'none'
+# ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 ACCOUNT_FORMS = {'signup': 'accounts.models.BasicSignupForm'}
 
@@ -167,7 +172,9 @@ SOCIALACCOUNT_PROVIDERS = {
 
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
+# EMAIL_HOST_USER = MY_EMAIL_HOST_USER
 EMAIL_HOST_USER = 'romanags'
-# EMAIL_HOST_PASSWORD = 'upgybfyvkjcqpuaa'
-EMAIL_HOST_PASSWORD = 'yxkvslvfcvcffknq'
+# EMAIL_HOST_PASSWORD = MY_EMAIL_HOST_PASSWORD
+EMAIL_HOST_PASSWORD = 'upgybfyvkjcqpuaa'
 EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER+'@yandex.ru'
