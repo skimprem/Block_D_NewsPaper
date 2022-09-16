@@ -59,4 +59,4 @@ class SubscribeMail(models.Model):
     text = models.TextField()
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    link = models.URLField()
+    # link = models.URLField(max_length=200)

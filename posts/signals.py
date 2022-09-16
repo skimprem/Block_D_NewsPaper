@@ -21,7 +21,7 @@ def subscribe_notify(sender, instance, **kwargs):
                 text =  post.text,
                 first_name = subscription.user.first_name,
                 last_name = subscription.user.last_name,
-                link = post.get_absolute_url()
+                # link = post.get_absolute_url()
             )
             mail.save()
 
