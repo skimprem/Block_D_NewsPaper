@@ -9,8 +9,6 @@ from django.template.loader import render_to_string
 @receiver(m2m_changed, sender=PostCategory)
 def subscribe_notify(sender, instance, **kwargs):
     post = instance
-    post_title = post.title
-    post_text = post.text
     post_categories = PostCategory.objects.filter(post=post)
     for post_category in post_categories:
         subscriptions = UsersSubscriptions.objects.filter(category=post_category.category)
@@ -19,10 +17,11 @@ def subscribe_notify(sender, instance, **kwargs):
             print(subscription)
             mail = SubscribeMail(
                 username = subscription.user.username,
-                title = post_title,
-                text =  post_text,
+                title = post.title,
+                text =  post.text,
                 first_name = subscription.user.first_name,
                 last_name = subscription.user.last_name,
+                link = post.get_absolute_url()
             )
             mail.save()
 
@@ -40,9 +39,3 @@ def subscribe_notify(sender, instance, **kwargs):
 
             msg.attach_alternative(html_content, "text/html")
             msg.send()
-    # send_mail(
-    #     subject=post_title,
-    #     message=post_title,
-    #     from_email='romanags@yandex.ru',
-    #     recipient_list=['roman.ags@gmail.com']
-    # )

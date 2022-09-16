@@ -9,6 +9,7 @@
         <h2>{{mail.title}}</h2>
         <p>Здравствуйте, {{mail.first_name}} {{mail.last_name}} ({{mail.username}})!
             Новая публикация по тематике вашей подписки:
+            {{mail.link}}
         </p>
         <p>{{mail.text|truncatechars:50}}</p>
     </body>
