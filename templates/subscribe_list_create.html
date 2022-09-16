@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"
+        <title> NewsPaper week subsctiption report </title>
+    </head>
+    <body>
+        <h2>Рассылка по подписке за неделю</h2>
+        <p>Здравствуйте, {{subscription.user.first_name}} {{subscription.user.last_name}} ({{subscription.user.username}})!
+            Новые публикации по тематике вашей подписки "{{subscription.category}}" за неделю:
+        </p>
+        {% for post in posts %}
+            <p>
+                <a href="http://127.0.0.1:8000{{post.get_absolute_url}}">{{post.title}}</a>
+            </p>
+        {% endfor %}
+    </body>
+    </html>
