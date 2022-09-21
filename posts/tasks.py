@@ -1,4 +1,11 @@
-from django.core.mail import send_mail
+# from django.core.mail import send_mail
+from celery import shared_task
+import time
 
-def send_mails():
-    print('hello from background tasks')
+@shared_task
+def hello():
+    time.sleep(10)
+    print("hello, world")
+
+# def send_mails():
+#     print('hello from background tasks')
