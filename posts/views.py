@@ -1,4 +1,4 @@
-from tkinter import W
+# from tkinter import W
 from xml.dom import ValidationErr
 from django.shortcuts import render, redirect, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
