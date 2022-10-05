@@ -7,6 +7,7 @@ from .forms import PostForm
 from .filters import PostFilter
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from .tasks import send_notification
 
 class PostsList(ListView):
     model = Post
@@ -46,7 +47,9 @@ class PostCreate(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
                 post.post_type = 'NE'
             elif path_info == '/articles/create/':
                 post.post_type = 'PA'
-            
+
+        post.save()
+        send_notification.apply_async([post.pk])
         return super().form_valid(form) 
 
 class PostSearch(PostsList):

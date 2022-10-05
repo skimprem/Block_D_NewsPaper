@@ -1,3 +1,3 @@
-from apscheduler.schedulers.background import BackgroundScheduler
+# from apscheduler.schedulers.background import BackgroundScheduler
 
-subscribe_scheduler = BackgroundScheduler()
+# subscribe_scheduler = BackgroundScheduler()

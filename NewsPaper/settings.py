@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'django_apscheduler',
+    # 'django_apscheduler',
 ]
 
 DEFAULT_FROM_EMAIL = 'romanags@yandex.ru'
@@ -179,8 +179,8 @@ EMAIL_HOST_USER = 'romanags'
 EMAIL_HOST_PASSWORD = 'upgybfyvkjcqpuaa'
 EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER+'@yandex.ru'
-APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
-APSCHEDULER_RUN_NOW_TIMEOUT = 25  # Seconds
+# APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
+# APSCHEDULER_RUN_NOW_TIMEOUT = 25  # Seconds
 
 CELERY_BROKER_URL = 'redis://localhost:6379'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379'
