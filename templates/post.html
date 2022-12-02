@@ -1,11 +1,14 @@
 <!-- Наследование от default.html -->
 {% extends 'flatpages/default.html' %}
 {% load custom_filters %}
+{% load cache %}
 
 <!-- Название OneNews -->
-{% block title %}
-Post
-{% endblock title %}
+{% cache 30 title %}
+    {% block title %}
+    Post
+    {% endblock title %}
+{% endcache %}
 
 <!-- Выводим новость -->
 {% block content %}

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from accounts.models import Author 
 from .resources import POST_TYPE
 from django.urls import reverse
+from django.core.cache import cache
 
 class Category(models.Model):
     """
@@ -58,6 +59,12 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse("post", kwargs={"pk": self.pk})
+    
+    def save(self, *args, **kwargs):
+        # вызываем метод родителя, чтобы сохранился объект
+        super().save(*args, **kwargs)
+        # удаляем его из кэша, чтобы сбросить
+        cache.delete(f'post-{self.pk}')
     
 class PostCategory(models.Model):
     """

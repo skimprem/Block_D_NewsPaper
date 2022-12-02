@@ -3,11 +3,14 @@
 
 {% load custom_filters %}
 {% load custom_tags %}
+{% load cache %}
 
 <!-- Название News -->
-{% block title %}
-News
-{% endblock title %}
+{% cache 30 title %}
+    {% block title %}
+    News
+    {% endblock title %}
+{% endcache %}
 
 <!-- Выводим все новости -->
 {% block content %}

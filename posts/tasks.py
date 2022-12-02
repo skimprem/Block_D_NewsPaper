@@ -4,7 +4,7 @@ from .models import Post, PostCategory, Category
 from accounts.models import UsersSubscriptions, SubscribeMail
 from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # @shared_task
 # def hello():
@@ -48,7 +48,7 @@ def send_notification(oid):
 
 @shared_task
 def week_notification():
-    initial_date = datetime.datetime.today() - datetime.timedelta(days=7)
+    initial_date = datetime.today() - timedelta(days=7)
     for category in Category.objects.all():
         posts = Post.objects.filter(pub_time__gt=initial_date.isoformat(), categories=category)
         subscriptions = UsersSubscriptions.objects.filter(category=category)
